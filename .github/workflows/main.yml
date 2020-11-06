@@ -20,5 +20,4 @@ jobs:
 
     - uses: xu-cheng/texlive-action/full@v1
       with:
-        run: |
-          latexmk -outdir=output -xelatex
+        run: ./build.sh
