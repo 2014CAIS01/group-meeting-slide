@@ -21,3 +21,8 @@ jobs:
     - uses: xu-cheng/texlive-action/full@v1
       with:
         run: ./build.sh
+
+    - uses: matheusalbino/git-commit@v1.0.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        message: "style: format the code by latexindent"
