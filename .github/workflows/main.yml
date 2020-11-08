@@ -22,7 +22,6 @@ jobs:
       with:
         run: |
           head -1 /etc/apk/repositories | sed s'/alpine\/.*$/alpine\/edge\/testing/' >> /etc/apk/repositories 
-          apk update
           apk --no-cache add \
             perl-app-cpanminus \
             perl-file-homedir \
@@ -36,7 +35,8 @@ jobs:
           
             ./build.sh
 
-    - uses: matheusalbino/git-commit@v1.0.1
+    - uses: EndBug/add-and-commit@v5
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
         message: "style: format the code by latexindent"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
