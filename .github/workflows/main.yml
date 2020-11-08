@@ -21,6 +21,8 @@ jobs:
     - uses: xu-cheng/texlive-action/full@v1
       with:
         run: |
+          head -1 /etc/apk/repositories | sed s'/alpine\/.*$/alpine\/edge\/testing/' >> /etc/apk/repositories 
+          apk update
           apk --no-cache add \
             perl-app-cpanminus \
             perl-file-homedir \
