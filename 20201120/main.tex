@@ -1,7 +1,7 @@
-\documentclass[10pt,aspectratio=169]{beamer}
+\documentclass[10pt,aspectratio=169]{ctexbeamer}
 \usepackage{amsmath}
 \usepackage{subfigure}
-\usepackage{xeCJK}
+% \usepackage{xeCJK}
 \usepackage[style=authortitle]{biblatex}
 
 
@@ -59,7 +59,6 @@
         \begin{column}{.35\textwidth}
             \includegraphics[width=\textwidth]{pic/nanocubes.jpg}
         \end{column}
-
     \end{columns}
 \end{frame}
 
@@ -82,10 +81,10 @@
 
 \begin{frame}{Top-k from Ranked Lists, TKR}
     \begin{columns}
-
         \begin{column}{.6\textwidth}
             \begin{itemize}[<+->]
                 \item 实际的查询可能需要对多个箱乘积中的键的测量值之和进行排序。
+                \item 这一问题称为从一些排序的数组中选取和前 $k$ 大的元素 (Top-k from Ranked Lists, TKR)。
                 \item 针对这一问题，该论文提出三种算法。
             \end{itemize}
         \end{column}
@@ -100,10 +99,10 @@
         \begin{column}{.3\textwidth}
             \includegraphics[width=\textwidth]{pic/sweep.png}
         \end{column}
-        \begin{column}{.7\textwidth}
+        \begin{column}{.7\textwidth}\pause
             \begin{itemize}[<+->]
                 \item 这一算法没有考虑排序信息，因此对于 Nanocubes 也适用。
-                \item 维护两个最小堆。第一个堆存储每一个箱乘积中的当前最小键和对应的值，第二个堆维护前 $k$ 相关的键。
+                \item 维护两个最小堆。第一个堆存储每一个箱乘积中的当前最小键和对应的值，第二个堆维护已有的聚合值前 $k$ 大的键。
                 \item 算法总时间复杂度为 $O(m \log m + N\log k + N\log m)$。
             \end{itemize}
         \end{column}
@@ -115,11 +114,11 @@
         \begin{column}{.3\textwidth}
             \includegraphics[width=\textwidth]{pic/ta.png}
         \end{column}
-        \begin{column}{.7\textwidth}
+        \begin{column}{.7\textwidth}\pause
             \begin{itemize}[<+->]
-                \item 计算机领域的常见算法。
+                \item 计算机科学领域的一种常见算法。
                 \item 维护一个队列和一个大小为 $k$ 的最小堆。
-                \item 贪心算法+终止条件：当
+                \item 贪心选择 + 终止条件：当
                       \begin{enumerate}
                           \item 找到的键已经达到 $k$ 个；
                           \item 当前剩余的所有的箱乘积最大值的和小于已有的第 $k$ 大的结果。
@@ -191,10 +190,7 @@
         \item 键数量越多，则 $\theta = 0.25$的混合算法加速比越高。
         \item 排序数组的数量越多，则加速比越小。
     \end{itemize}
-
 \end{frame}
-
-
 
 \begin{frame}{总结}
     \begin{itemize}[<+->]
