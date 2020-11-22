@@ -21,19 +21,6 @@ jobs:
     - uses: xu-cheng/texlive-action/full@v1
       with:
         run: |
-          apk --no-cache add \
-            perl-log-dispatch \
-            perl-log-log4perl \
-            perl-namespace-autoclean \
-            perl-params-validationcompiler \
-            perl-specio \
-            perl-unicode-linebreak \
-            perl-yaml-tiny
-          apk --no-cache \
-            --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-            add \
-            perl-file-homedir
-
           ./build.sh
 
     - uses: EndBug/add-and-commit@v5
