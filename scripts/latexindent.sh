@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
-cd $(dirname $0)
-for subdir in `find . -regex '\./[0-9]*'`; do
+root_dir=$(dirname "$(dirname "$(readlink -f "$0")")")
+src_dir=$root_dir/src
+output_dir=$root_dir/output
+cd $src_dir
+for subdir in `ls`; do
     cd $subdir
 
     # Indent
@@ -14,12 +17,7 @@ for subdir in `find . -regex '\./[0-9]*'`; do
         latexindent -y="defaultIndent: '    '" -w -sl -s $file
     done
 
-    # Build
-    echo '##########' Build $subdir '##########'
-    latexmk -xelatex -shell-escape --outdir=output
-
-    # Clean
-    rm -rf output/
+    # Clean    
     rm *.bak* indent.log
     cd -
 done

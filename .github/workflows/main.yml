@@ -19,12 +19,21 @@ jobs:
     - uses: actions/checkout@v2
 
     - uses: xu-cheng/texlive-action/full@v1
+      name: Run latexindent
       with:
-        run: |
-          ./build.sh
+        run: ./scripts/latexindent.sh
 
     - uses: EndBug/add-and-commit@v5
       with:
         message: "style: format the code by latexindent"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - uses: xu-cheng/texlive-action/full@v1
+      name: Run latexmk
+      with:
+        run: ./scripts/latexmk.sh
+
+    - uses: actions/upload-artifact@v2
+      with:
+        path: output/**/*.pdf
